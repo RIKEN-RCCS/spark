@@ -118,12 +118,48 @@ public final class Platform {
     _UNSAFE.putFloat(object, offset, value);
   }
 
+  static class PlatformDouble {
+    double v = 0;
+  }
+
   public static double getDouble(Object object, long offset) {
-    return _UNSAFE.getDouble(object, offset);
+    if ((offset & 7L) == 0L) {
+      return _UNSAFE.getDouble(object, offset);
+    } else {
+      if (true) {System.out.println("Handles unaligned get.");}
+      try {
+	PlatformDouble buf = new PlatformDouble();
+	java.lang.reflect.Field f = buf.getClass().getDeclaredField("v");
+	long off = _UNSAFE.objectFieldOffset(f);
+	int h0 = _UNSAFE.getInt(object, offset);
+	int h1 = _UNSAFE.getInt(object, (offset + 4));
+	_UNSAFE.putInt(buf, off, h0);
+	_UNSAFE.putInt(buf, (off + 4), h1);
+	return buf.v;
+      } catch (NoSuchFieldException x) {
+	throw new Error(x);
+      }
+    }
   }
 
   public static void putDouble(Object object, long offset, double value) {
-    _UNSAFE.putDouble(object, offset, value);
+    if ((offset & 7L) == 0L) {
+      _UNSAFE.putDouble(object, offset, value);
+    } else {
+      if (true) {System.out.println("Handles unaligned put.");}
+      try {
+	PlatformDouble buf = new PlatformDouble();
+	java.lang.reflect.Field f = buf.getClass().getDeclaredField("v");
+	long off = _UNSAFE.objectFieldOffset(f);
+	buf.v = value;
+	int h0 = _UNSAFE.getInt(buf, off);
+	int h1 = _UNSAFE.getInt(buf, (off + 4));
+	_UNSAFE.putInt(object, offset, h0);
+	_UNSAFE.putInt(object, (offset + 4), h1);
+      } catch (NoSuchFieldException x) {
+	throw new Error(x);
+      }
+    }
   }
 
   public static Object getObjectVolatile(Object object, long offset) {
