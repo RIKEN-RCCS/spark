@@ -74,18 +74,17 @@ public final class Platform {
     if ((offset & 7L) == 0L) {
       return _UNSAFE.getLong(object, offset);
     } else {
-      if (true) {System.out.println("Handles unaligned get.");}
       try {
-	PlatformLong buf = new PlatformLong();
-	java.lang.reflect.Field f = buf.getClass().getDeclaredField("v");
-	long off = _UNSAFE.objectFieldOffset(f);
-	int h0 = _UNSAFE.getInt(object, offset);
-	int h1 = _UNSAFE.getInt(object, (offset + 4));
-	_UNSAFE.putInt(buf, off, h0);
-	_UNSAFE.putInt(buf, (off + 4), h1);
-	return buf.v;
+        PlatformLong buf = new PlatformLong();
+        java.lang.reflect.Field f = buf.getClass().getDeclaredField("v");
+        long off = _UNSAFE.objectFieldOffset(f);
+        int h0 = _UNSAFE.getInt(object, offset);
+        int h1 = _UNSAFE.getInt(object, (offset + 4));
+        _UNSAFE.putInt(buf, off, h0);
+        _UNSAFE.putInt(buf, (off + 4), h1);
+        return buf.v;
       } catch (NoSuchFieldException x) {
-	throw new Error(x);
+        throw new Error(x);
       }
     }
   }
@@ -94,18 +93,17 @@ public final class Platform {
     if ((offset & 7L) == 0L) {
       _UNSAFE.putLong(object, offset, value);
     } else {
-      if (true) {System.out.println("Handles unaligned put.");}
       try {
-	PlatformLong buf = new PlatformLong();
-	java.lang.reflect.Field f = buf.getClass().getDeclaredField("v");
-	long off = _UNSAFE.objectFieldOffset(f);
-	buf.v = value;
-	int h0 = _UNSAFE.getInt(buf, off);
-	int h1 = _UNSAFE.getInt(buf, (off + 4));
-	_UNSAFE.putInt(object, offset, h0);
-	_UNSAFE.putInt(object, (offset + 4), h1);
+        PlatformLong buf = new PlatformLong();
+        java.lang.reflect.Field f = buf.getClass().getDeclaredField("v");
+        long off = _UNSAFE.objectFieldOffset(f);
+        buf.v = value;
+        int h0 = _UNSAFE.getInt(buf, off);
+        int h1 = _UNSAFE.getInt(buf, (off + 4));
+        _UNSAFE.putInt(object, offset, h0);
+        _UNSAFE.putInt(object, (offset + 4), h1);
       } catch (NoSuchFieldException x) {
-	throw new Error(x);
+        throw new Error(x);
       }
     }
   }
@@ -126,18 +124,17 @@ public final class Platform {
     if ((offset & 7L) == 0L) {
       return _UNSAFE.getDouble(object, offset);
     } else {
-      if (true) {System.out.println("Handles unaligned get.");}
       try {
-	PlatformDouble buf = new PlatformDouble();
-	java.lang.reflect.Field f = buf.getClass().getDeclaredField("v");
-	long off = _UNSAFE.objectFieldOffset(f);
-	int h0 = _UNSAFE.getInt(object, offset);
-	int h1 = _UNSAFE.getInt(object, (offset + 4));
-	_UNSAFE.putInt(buf, off, h0);
-	_UNSAFE.putInt(buf, (off + 4), h1);
-	return buf.v;
+        PlatformDouble buf = new PlatformDouble();
+        java.lang.reflect.Field f = buf.getClass().getDeclaredField("v");
+        long off = _UNSAFE.objectFieldOffset(f);
+        int h0 = _UNSAFE.getInt(object, offset);
+        int h1 = _UNSAFE.getInt(object, (offset + 4));
+        _UNSAFE.putInt(buf, off, h0);
+        _UNSAFE.putInt(buf, (off + 4), h1);
+        return buf.v;
       } catch (NoSuchFieldException x) {
-	throw new Error(x);
+        throw new Error(x);
       }
     }
   }
@@ -146,18 +143,17 @@ public final class Platform {
     if ((offset & 7L) == 0L) {
       _UNSAFE.putDouble(object, offset, value);
     } else {
-      if (true) {System.out.println("Handles unaligned put.");}
       try {
-	PlatformDouble buf = new PlatformDouble();
-	java.lang.reflect.Field f = buf.getClass().getDeclaredField("v");
-	long off = _UNSAFE.objectFieldOffset(f);
-	buf.v = value;
-	int h0 = _UNSAFE.getInt(buf, off);
-	int h1 = _UNSAFE.getInt(buf, (off + 4));
-	_UNSAFE.putInt(object, offset, h0);
-	_UNSAFE.putInt(object, (offset + 4), h1);
+        PlatformDouble buf = new PlatformDouble();
+        java.lang.reflect.Field f = buf.getClass().getDeclaredField("v");
+        long off = _UNSAFE.objectFieldOffset(f);
+        buf.v = value;
+        int h0 = _UNSAFE.getInt(buf, off);
+        int h1 = _UNSAFE.getInt(buf, (off + 4));
+        _UNSAFE.putInt(object, offset, h0);
+        _UNSAFE.putInt(object, (offset + 4), h1);
       } catch (NoSuchFieldException x) {
-	throw new Error(x);
+        throw new Error(x);
       }
     }
   }
